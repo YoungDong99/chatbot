@@ -29,6 +29,11 @@ class Embedder:
                 max_length=self.max_length,
                 return_tensors="pt",
             ).to(self.device)
+            
+            # ModernBERT 계열은 token_type_ids를 받지 않는 경우가 있어 제거
+            if "token_type_ids" in inputs:
+                inputs.pop("token_type_ids")
+
 
             outputs = self.model(**inputs)
 
