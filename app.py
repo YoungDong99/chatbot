@@ -45,7 +45,7 @@ embedder = load_embedder()
 llm = load_llm()
 bot = RAGChatbot(embedder=embedder, store=store, llm=llm, top_k=TOP_K)
 
-st.title("사내 챗봇 (DOCX 1개 + FAISS + Streamlit)")
+st.title("업무 도우미 챗봇")                                                        
 
 if "chat" not in st.session_state:
     st.session_state.chat = []
