@@ -8,7 +8,7 @@ from rag.config import (
 from rag.build_index import ensure_llm_model, build as build_index
 from rag.embeddings import Embedder
 from rag.faiss_store import FaissStore
-from rag.llm_llamacpp import LlamaCppLLM
+# from rag.llm_llamacpp import LlamaCppLLM
 from rag.rag_chain import RAGChatbot
 
 st.set_page_config(page_title="사내 챗봇 (RAG)", layout="wide")
@@ -17,10 +17,10 @@ st.set_page_config(page_title="사내 챗봇 (RAG)", layout="wide")
 def load_embedder():
     return Embedder(model_id=EMB_MODEL_ID, max_length=EMB_MAX_LENGTH, device="cpu")
 
-@st.cache_resource
-def load_llm():
-    ensure_llm_model()
-    return LlamaCppLLM(model_path=LLM_MODEL_PATH, n_ctx=4096, max_tokens=512)
+# @st.cache_resource
+# def load_llm():
+#     ensure_llm_model()
+#     return LlamaCppLLM(model_path=LLM_MODEL_PATH, n_ctx=4096, max_tokens=512)
 
 def load_store():
     if not (FAISS_INDEX_PATH.exists() and CHUNKS_PATH.exists()):
@@ -42,7 +42,8 @@ if store is None:
     st.stop()
 
 embedder = load_embedder()
-llm = load_llm()
+# llm = load_llm()
+llm = None # 임시 : LLM 없이 검색 결과만
 bot = RAGChatbot(embedder=embedder, store=store, llm=llm, top_k=TOP_K)
 
 st.title("업무 도우미 챗봇")                                                        

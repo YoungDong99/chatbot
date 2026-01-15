@@ -22,7 +22,7 @@ class RAGChatbot:
         hits = self.store.search(qvec, self.top_k)
         context = build_context(hits)
 
-        # ✅ 임시 모드: LLM이 없으면 검색 결과만 보여주기
+        # 임시 모드: LLM이 없으면 검색 결과만 보여주기
         if self.llm is None:
             answer_text = (
                 "LLM(답변 생성)이 아직 설치되지 않아, 검색된 문서 발췌만 표시합니다.\n\n"
